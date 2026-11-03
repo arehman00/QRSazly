@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #f3f6fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #e7eef8;
+  --color-fg: #122033;
+  --color-muted: #52627a;
+  --color-primary: #1d6adf;
+  --color-primary-fg: #f7fbff;
+  --color-accent: #12b8c9;
+  --color-logo-plate: #ffffff;
+  --color-border: #d5e0ee;
+  --color-danger: #b42318;
+  --color-warn: #9a6700;
+  --shadow-panel: 0 1px 2px rgb(18 32 51 / 0.04), 0 18px 40px rgb(29 106 223 / 0.07);
+}
+
+html.dark {
+  --color-bg: #07111e;
+  --color-surface: #0e1b2e;
+  --color-surface-2: #17304a;
+  --color-fg: #e8f1fb;
+  --color-muted: #a7b8ce;
+  --color-primary: #5aa2ff;
+  --color-primary-fg: #04101c;
+  --color-accent: #3ee0ee;
+  --color-logo-plate: #ffffff;
+  --color-border: #23405f;
+  --color-danger: #ffb4ab;
+  --color-warn: #f5d48a;
+  color-scheme: dark;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  input[type="range"],
+  input[type="checkbox"] {
+    accent-color: var(--color-primary);
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.studio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.studio-preview {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .studio-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 23.5rem;
+    grid-template-areas:
+      "form preview"
+      "style preview";
+    align-items: start;
+    column-gap: 1.5rem;
+    row-gap: 1.75rem;
+  }
+
+  .studio-form {
+    grid-area: form;
+  }
+
+  .studio-preview {
+    grid-area: preview;
+    position: sticky;
+    top: 5.5rem;
+    max-height: calc(100vh - 6.5rem);
+    overflow: auto;
+  }
+
+  .studio-style {
+    grid-area: style;
+  }
+}
+
+.qr-output svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.qr-checker {
+  background-color: var(--color-surface);
+  background-image:
+    linear-gradient(45deg, var(--color-surface-2) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-surface-2) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-surface-2) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-surface-2) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.brand-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.scan-frame {
+  position: relative;
+  width: min(54%, 15rem);
+  aspect-ratio: 1;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+
+.scan-corner-tl {
+  top: 0;
+  left: 0;
+  border-width: 3px 0 0 3px;
+  border-radius: 0.6rem 0 0 0;
+}
+
+.scan-corner-tr {
+  top: 0;
+  right: 0;
+  border-width: 3px 3px 0 0;
+  border-radius: 0 0.6rem 0 0;
+}
+
+.scan-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 3px 3px;
+  border-radius: 0 0 0 0.6rem;
+}
+
+.scan-corner-br {
+  right: 0;
+  bottom: 0;
+  border-width: 0 3px 3px 0;
+  border-radius: 0 0 0.6rem 0;
+}
+
+.scan-line {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent);
+  animation: scan-sweep 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes scan-sweep {
+  from {
+    top: 10%;
+  }
+  to {
+    top: 86%;
+  }
+}
