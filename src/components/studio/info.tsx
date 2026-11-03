@@ -67,6 +67,10 @@ const FAQ = [
     q: "Do I need an account?",
     a: "No. Nothing is saved to a server. Refreshing the page clears what you typed.",
   },
+  {
+    q: "Does the scanner support a flashlight for dark rooms?",
+    a: "Yes! When you open the scanner, you will see a flashlight icon on the camera frame. Tap it to toggle your device's flash on or off so you can read codes easily in low light."
+  },
 ];
 
 export function Info() {
