@@ -1,6 +1,6 @@
 {
-  "name": "app-builder-workspace",
-  "private": true,
+ "name": "qrsazly-scanpro",
+ "private": true,
   "sideEffects": false,
   "type": "module",
   "overrides": {
